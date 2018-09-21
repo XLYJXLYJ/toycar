@@ -1,0 +1,51 @@
+// 手型
+.cur {
+    cursor: pointer;
+}
+
+//浮动
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+//清除浮动
+.clear {
+    zoom: 1;
+}
+
+.clear:after {
+    display: block;
+    content: "clear";
+    height: 0;
+    clear: both;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+//超出一行显示省略号
+.ellipsisOne {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+//超出三行显示省略号
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+.inB {
+    display: inline-block;
+}
+
+//手型
+.cur {
+    cursor: pointer;
+}

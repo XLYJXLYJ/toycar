@@ -1,0 +1,32 @@
+//初始化项目（shift+insert 进行粘贴）
+vue init webpack
+//安装依赖
+cnpm install
+//运行项目
+npm run dev
+//安装element-ui
+npm install element-ui --save
+main.js引入
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+//安装sass
+cnpm install sass-loader node-sass vue-style-loader --D
+//安装vuex
+cnpm install vuex --save()生产环境中使用
+//打包配置
+config ->index.js ->build->assetPublicPath:‘’
+//跨域配置
+config -> index.js ->dev
+proxyTable: {
+'/api': {
+ target: "http://www.manykit.com", //设置你调用的接口域名和端口号 别忘了加http
+ changeOrigin: true,
+                pathRewrite: {
+                    '^/api': '' //这里理解成用‘/api'代替target里面的地址，后面组件中我们掉接口时直接用api代替 
+                        //比如我要调用'http://40.00.100.133:3002/user/login'，直接写‘/api/user/login'即可
+                }
+            }
+        },
+//安装axios
+npm install axios --save
+import axios from 'axios'

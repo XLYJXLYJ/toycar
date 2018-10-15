@@ -5,8 +5,9 @@
       <el-row>
         <el-col :span="6">
           <div class="grid-content header-left">
-            <router-link :to="{name:'Toycar'}" v-if="$route.name==='Toycar'">返回编程玩</router-link>
-            <div v-else @click="back"><img src="./../assets/img/back.png" alt=""></div>
+            <a href="http://www.manykit.com">返回编程玩</a>
+            <!-- <router-link :to="{name:'Toycar'}" v-if="$route.name==='Toycar'">返回编程玩</router-link>
+            <div v-else @click="back"><img src="./../assets/img/back.png" alt=""></div> -->
           </div>
         </el-col>
         <el-col :span="12">

@@ -8,7 +8,7 @@
         <el-menu-item index="1">Mini车</el-menu-item>
         <el-menu-item index="2">履带车</el-menu-item>
       </el-menu>
-      <section class="container">
+      <section class="container" v-show="isdemo">
         <el-row type="flex" class="row-bg" justify="space-between">
           <el-col :span="4" v-for='(list,index) in lists' :key="index">
             <div class="grid-content bg-purple">
@@ -22,7 +22,7 @@
                   <div class="grid-content header-left" @click="editProject(list.id)">编辑</div>
                 </el-col>
                 <el-col :span="12">
-                  <div class="grid-content header-middle">删除</div>
+                  <div class="grid-content header-middle" @click="deleteProject(list.id)">删除</div>
                 </el-col>
                 <!-- <el-col :span="8">
                   <div class="grid-content header-right"></div>
@@ -80,6 +80,7 @@ export default {
       activeIndex:'0',
       projecttype:0,
       lists:[],
+      isdemo:'',
       form:{
         title:'',
         p_desc:'',
@@ -88,13 +89,30 @@ export default {
       }
     }
   },
+  created:function(){
+    let url=window.location.href;
+    // var theRequest = new Object();  
+    if (window.location.href.indexOf("?") != -1) {  
+        var str = url.split("?=");
+        this.$store.state.toycarid=str[1];
+        sessionStorage.userid=str[1];
+        if(sessionStorage.userid!=='undefined'){
+            this.isdemo=true
+          }else{
+            this.isdemo=false
+        }
+        // for(var i = 0; i < strs.length; i ++) {  
+        //     theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);  
+        // }  
+    }
+},
   methods: {
     addProject(cb) {
       let Vue = this;
       func.ajaxPost(
         api.project,
         {
-          userid:'1',
+          userid:sessionStorage.userid,
           title:this.form.title,
           p_desc:this.form.p_desc,
           projecttype:this.form.projecttype,
@@ -119,21 +137,45 @@ export default {
       func.ajaxPost(
         api.projectlist,
         {
-          userid:'1',
+          userid:sessionStorage.userid,
           projecttype:parseInt(self.activeIndex),
           pagenum:pagenum,
           pagesize:pagesize,
 
         },
         function (data) {
+            console.log(111)
+             console.log(data.status)
             if(data.status == 200) {
-                if(data.data) {
+                if(data.msg=='这回真的没有了~') {
+                    self.isdemo=false
+                    self.Message("你还没有玩车车项目", "success");
+                }else{
                   self.total = data.data.total;
                   self.pagesize = data.data.pagesize;
                   self.currentpage = data.data.pagenum;
                   self.lists = data.data.data;
                 }
             }
+        }
+      )
+    },
+    deleteProject(index) {
+      var self = this;
+      // console.log(index);
+      func.ajaxPost(
+        api.project,
+        {
+          id:index,
+          state:5
+        },
+        function (data) {
+        if(data.status == 200) {
+          self.Message("删除成功", "success");
+              setTimeout(() => {
+              window.location.reload();
+            }, 1000);
+          }
         }
       )
     },
@@ -158,12 +200,15 @@ export default {
     func.ajaxPost(
       api.projectlist,
       {
-        userid:'1',
+        userid:sessionStorage.userid,
         projecttype:0
       },
       function (data) {
           if(data.status == 200) {
-              if(data.data) {
+              if(data.data.data.msg=='这回真的没有了~') {
+                  self.isdemo=false
+                  self.Message("你还没有玩车车项目", "success");
+              }else{
                 self.total = data.data.total;
                 self.pagesize = data.data.pagesize;
                 self.currentpage = data.data.pagenum;

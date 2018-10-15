@@ -52,7 +52,7 @@
            <div class="addSkillBox"><el-button type="primary" @click="addSkill()">新增技能</el-button></div>
            <div class="sub-carousel">
                <div class="skill" v-for="(skill,index) in skillList" :key="index" @click="selectSkill(index)">
-                   <img src="./../assets/img/car.png" alt="">
+                   <img src="static/img/car.png" alt="">
                    <!-- <i class="el-icon-success"></i> -->
                    <i class="el-icon-error" @click="delSkill(index)"></i>
                </div>
@@ -60,7 +60,7 @@
        </section>
       <section class="container clear">
         <section class="skill-info">
-            <div class="skill-appearance fl"><img src="./../assets/img/car.png" alt=""></div>
+            <div class="skill-appearance fl"><img src="static/img/car.png" alt=""></div>
             <div class="skill-content fl">
                 <p>{{tag.name}}</p>
                 <el-tag>定义回复时间

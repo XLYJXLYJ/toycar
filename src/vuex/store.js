@@ -15,7 +15,11 @@ export default new Vuex.Store({
     mutations: {
         //改变项目弹窗状态
         toggleAddtoycar(state) {
-            state.dialogAddtoycar = !state.dialogAddtoycar
+            if(sessionStorage.userid!=='undefined'){
+                state.dialogAddtoycar = !state.dialogAddtoycar
+            }else{
+                alert('请返回编程登录后再进行操作')
+            }
         },
         //改变保存车子状态
         toggleIsSaveCar(state) {

@@ -5,7 +5,7 @@
         <section class="carInfo">
             <header>玩具车信息</header>
             <section>
-                <div class="fl car-appearance"><img src="./../assets/img/car.png" alt=""></div>
+                <div class="fl car-appearance"><img src="static/img/car.png" alt=""></div>
                 <div class="fl carInfo-right">
                     <el-input v-model="carName" placeholder="项目名"></el-input>
                     <el-input v-model="carAuthor" placeholder="作者"></el-input>
@@ -22,7 +22,7 @@
                 <section>
                     <el-row type="flex" class="row-bg" justify="space-between">
                         <el-col :span="8" v-for="(car,index) in carList" :key="index">
-                            <img src="./../assets/img/car.png" alt="">
+                            <img src="static/img/car.png" alt="">
                             <i class="el-icon-success"></i>
                             <div class="car-oprate">
                                 <span @click="editCar(id,index)">编辑</span>
